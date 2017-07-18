@@ -1,0 +1,27 @@
+{
+  "name": "sakana",
+  "version": "1.0.0",
+  "description": "Eyepromise General Slack Bot (EPGSB)",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyepromise/sakanabot.git"
+  },
+  "keywords": [
+    "slack",
+    "bot"
+  ],
+  "author": "D. Taylor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/eyepromise/sakanabot/issues"
+  },
+  "homepage": "https://github.com/eyepromise/sakanabot#readme",
+  "dependencies": {
+    "botbuilder": "^3.8.4",
+    "restify": "^5.0.1"
+  }
+}

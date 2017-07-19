@@ -20,24 +20,25 @@ server.post('/api/messages', connector.listen())
 // Receive messages from the user and respond by echoing each message
 // back (prefixed with 'You said:')
 var bot = new builder.UniversalBot(connector, [
-                                   function (session, args, next) {
-                                               if (!session.userData.name){
-                                               session.beginDialog('profile');
-                                               } else {
-                                               next();
-                                               }
-                                               },
-                                               function (session,results){
-                                               session.sendTyping();
-                                               setTimeout(function () {
-                                              session.send('Hello %s', session.userData.name);
-                                              }, 3000);
-                                               }
+        function (session, args, next) {
+                if (!session.userData.name){
+                        session.beginDialog('profile');
+                } else {
+                        next();
+                }
+            },
+            function (session,results){
+                    //send bot is typing message
+                    session.sendTyping();
+                    setTimeout(function () {
+                            session.send('Hello %s', session.userData.name);
+                            }, 3000);
+            }
 ]);
 
 bot.dialog('profile', [
         function (session){
-                builder.Prompts.text(session, "Hello. What is your name?";
+                builder.Prompts.text(session, 'Hello. What is your name?';
                 },
                 function (session, results){
                         session.userData.name=results.response;

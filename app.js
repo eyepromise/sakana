@@ -29,16 +29,16 @@ var bot = new builder.UniversalBot(connector, [
             },
             function (session,results){
                     //send bot is typing message
-                    session.sendTyping();
-                    setTimeout(function () {
+                    //session.sendTyping();
+                    //setTimeout(function () {
                             session.send('Hello %s', session.userData.name);
-                            }, 3000);
+                    //        }, 3000);
             }
 ]);
 
 bot.dialog('profile', [
         function (session){
-                builder.Prompts.text(session, 'Hello. What is your name?';
+                builder.Prompts.text(session, 'Hello. What is your name?');
                 },
                 function (session, results){
                         session.userData.name=results.response;

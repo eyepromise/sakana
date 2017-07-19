@@ -31,7 +31,7 @@ var bot = new builder.UniversalBot(connector, [
                     //send bot is typing message
                     session.sendTyping();
                     setTimeout(function () {
-                            session.send('Hello %s', session.userData.name);
+                            session.send('Hello %s', session.userData.name,'. How can I help you?');
                             }, 3000);
             }
 ]);

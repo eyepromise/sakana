@@ -52,4 +52,20 @@ bot.dialog('sakana', function (session, args, next) {
            })
 .triggerAction({
                matches: /^sakana$/i,
+               onSelectAction: (session, args, next) => {
+               session.beginDialog(args.action, args);
+               }
                });
+
+//Button Test
+bot.dialog('product', function (session, args, next) {
+           builder.Prompts.choice(session, "Which product?", "Restore|EZ Tears|Zeaxanthin", builder.ListStyle.button);
+
+           })
+.triggerAction({
+               matches: /^product$/i,
+               onSelectAction: (session, args, next) => {
+               session.beginDialog(args.action, args);
+               }
+               });
+

@@ -45,3 +45,11 @@ bot.dialog('profile', [
                         session.endDialog();
                 }
 ]);
+
+//Invoke Sakana
+bot.dialog('sakana', function (session, args, next) {
+           session.endDialog("Sakana is a bot that can help with a mulitude of tasks. Currently in Development.");
+           })
+.triggerAction({
+               matches: /^sakana$/i,
+               });

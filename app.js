@@ -48,7 +48,7 @@ bot.dialog('profile', [
 
 //Invoke Sakana
 bot.dialog('sakana', function (session, args, next) {
-           session.endDialog("Sakana is a bot that can help with a mulitude of tasks. Currently in Development.");
+           session.endDialog("Hello," + session.userData.name + ". Sakana is a bot that can help with a mulitude of tasks. Currently in Development.");
            builder.Prompts.choice(session, "Here are some functions being worked on:", "Salesforce|Hubspot|Analytics", builder.ListStyle.button);
 
            })

@@ -67,10 +67,11 @@ bot.dialog('product', function (session, args, next) {
                onSelectAction: (session, args, next) => {
                session.beginDialog(args.action, args);
                }
+               //Once triggered, will end the dialog.
+               .cancelAction('cancelAction', 'Goodbye', {
+                             matches: /^cancel$|^goodbye$/i
+                             session.endDialog("Ok, goodbye");
                });
 
-//Once triggered, will end the dialog.
-.cancelAction('cancelAction', 'Goodbye', {
-              matches: /^cancel$|^goodbye$/i
-              session.endDialog("Ok, goodbye");
+
               });

@@ -25,13 +25,11 @@ bot.dialog('/', function (session, args) {
                 if (!session.userData.greeting){
                     session.send("Hello. What is your name?");
                     session.userData.greeting = true;
-           } else if (!session.userData.name){
-           getName(session);
-           } else {
-           session.userData = null;
-           }
-           
-                }
+                        } else if (!session.userData.name){
+                        getName(session);
+                        } else {
+                        session.userData = null;
+                    }
 
             function getName(session){
             //send bot is typing message
@@ -44,7 +42,7 @@ bot.dialog('/', function (session, args) {
            //session.send('Hello %s. How can I help you?', session.userData.name);
            //}, 3000);
             }
-);
+           });
 
 //bot.dialog('profile', [
 //        function (session){

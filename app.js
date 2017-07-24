@@ -52,7 +52,7 @@ bot.dialog('/', function (session, args) {
 //                        session.userData.name=results.response;
 //                        session.endDialog();
 //                }
-]);
+//]);
 
 //Invoke Sakana
 bot.dialog('sakana', function (session, args, next) {

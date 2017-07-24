@@ -18,63 +18,15 @@ var bot = new builder.UniversalBot(connector);
 // Listen for messages on /api/messages
 server.post('/api/messages', connector.listen());
 
-
-// Receive messages from the user and respond by echoing each message
-// back (prefixed with 'You said:')
-bot.dialog('/', function (session, args) {
-                if (!session.userData.greeting){
-                    session.send("Hello. What is your name?");
-                    session.userData.greeting = true;
-                        } else if (!session.userData.name){
-                        getName(session);
-                        } else {
-                        session.userData = null;
-                    }
-
-            function getName(session){
-            //send bot is typing message
-           name = session.message.text;
-           session.userData.name=name;
-           session.send("Hello, " + name + ".");
-           
-           //session.sendTyping();
-           //setTimeout(function () {
-           //session.send('Hello %s. How can I help you?', session.userData.name);
-           //}, 3000);
-            }
-           });
-
-//bot.dialog('profile', [
-//        function (session){
-//                builder.Prompts.text(session, 'Hello. What is your name?');
-//                },
-//                function (session, results){
-//                        session.userData.name=results.response;
-//                        session.endDialog();
-//                }
-//]);
-
-//Invoke Sakana
-bot.dialog('sakana', function (session, args, next) {
-           session.endDialog("Hello," + session.userData.name + ". Sakana is a bot that can help with a mulitude of tasks. Currently in Development.");
-           builder.Prompts.choice(session, "Here are some functions being worked on:", "Salesforce|Hubspot|Analytics", builder.ListStyle.button);
-
-           })
-.triggerAction({
-               matches: /^sakana$/i,
-               onSelectAction: (session, args, next) => {
-               session.beginDialog(args.action, args);
-               }
-               });
-
-//Button Test
-bot.dialog('product', function (session, args, next) {
-           builder.Prompts.choice(session, "Which product?", "Restore|EZ Tears|Zeaxanthin", builder.ListStyle.button);
-
-           })
-.triggerAction({
-               matches: /^product$/i,
-               onSelectAction: (session, args, next) => {
-               session.beginDialog(args.action, args);
-               }
-            });
+bot.on('contactRelationUpdate' function (message) {
+       if (identity.id === message.address.bot.id){
+       var name = message.user ? message.user.name : null;
+       var reply = new builder.Message()
+       .address(message.address)
+       .text("Hello %s. How are you today?", name || 'there');
+       bot.send(reply);
+       } else {
+            //delete their data
+       }
+       
+});

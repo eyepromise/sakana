@@ -18,7 +18,7 @@ var bot = new builder.UniversalBot(connector);
 // Listen for messages on /api/messages
 server.post('/api/messages', connector.listen());
 
-bot.on('contactRelationUpdate' function (message) {
+bot.on('contactRelationUpdate', function (message) {
        if (identity.id === message.address.bot.id){
        var name = message.user ? message.user.name : null;
        var reply = new builder.Message()

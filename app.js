@@ -9,41 +9,51 @@ server.listen(process.env.port || process.env.PORT || 3978, function() {
 
 // Create chat connector for communicating with the Bot Framework Service
 var connector = new builder.ChatConnector({
-                                          appId: 'c4ad429c-4046-4bf2-8d94-303aea58753c',
-                                          appPassword: 'CLF3jnBrXFryCY3rZRARn27'
-                                          });
+    appId: 'c4ad429c-4046-4bf2-8d94-303aea58753c',
+    appPassword: 'CLF3jnBrXFryCY3rZRARn27'
+});
 
-// Listen for messages from users
-server.post('/api/messages', connector.listen())
+var bot = new builder.UniversalBot(connector);
+
+// Listen for messages on /api/messages
+server.post('/api/messages', connector.listen());
 
 
 // Receive messages from the user and respond by echoing each message
 // back (prefixed with 'You said:')
-var bot = new builder.UniversalBot(connector, [
-        function (session, args, next) {
-                if (!session.userData.name){
-                        session.beginDialog('profile');
-                } else {
-                        next();
+bot.dialog('/', function (session, args) {
+                if (!session.userData.greeting){
+                    session.send("Hello. What is your name?");
+                    session.userData.greeting = true;
+           } else if (!session.userData.name){
+           getName(session);
+           } else {
+           session.userData = null;
+           }
+           
                 }
-            },
-            function (session,results){
-                    //send bot is typing message
-                    session.sendTyping();
-                    setTimeout(function () {
-                            session.send('Hello %s. How can I help you?', session.userData.name);
-                            }, 3000);
-            }
-]);
 
-bot.dialog('profile', [
-        function (session){
-                builder.Prompts.text(session, 'Hello. What is your name?');
-                },
-                function (session, results){
-                        session.userData.name=results.response;
-                        session.endDialog();
-                }
+            function getName(session){
+            //send bot is typing message
+           name = session.message.text;
+           session.userData.name=name;
+           session.send("Hello, " + name + ".");
+           
+           //session.sendTyping();
+           //setTimeout(function () {
+           //session.send('Hello %s. How can I help you?', session.userData.name);
+           //}, 3000);
+            }
+);
+
+//bot.dialog('profile', [
+//        function (session){
+//                builder.Prompts.text(session, 'Hello. What is your name?');
+//                },
+//                function (session, results){
+//                        session.userData.name=results.response;
+//                        session.endDialog();
+//                }
 ]);
 
 //Invoke Sakana

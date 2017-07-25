@@ -25,6 +25,7 @@ bot.on(function (message) {
        .address(message.address)
        .text("Hello %s. How are you today?", name || 'there');
        bot.send(reply);
+       console.log(reply);
        } else {
             //delete their data
        }

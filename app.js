@@ -21,8 +21,8 @@ server.post('/api/messages', connector.listen());
 bot.on('contactRelationUpdate', function (message) {
        if (identity.id === message.address.bot.id){
        var name = message.user ? message.user.name : null;
-       var reply = new builder.Message()
-       .address(message.address)
+       var reply = new builder.Message();
+       .address(message.address);
        .text("Hello %s. How are you today?", name || 'there');
        bot.send(reply);
        } else {

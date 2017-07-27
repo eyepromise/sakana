@@ -18,7 +18,7 @@ var connector = new builder.ChatConnector({
 server.post('/api/messages', connector.listen());
 
 //Get user name
-slack.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () +> {
+slack.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () => {
 let username = slack.dataStore.getUserById(slack.activeUserId);
          )};
 

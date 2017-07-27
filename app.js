@@ -17,11 +17,16 @@ var connector = new builder.ChatConnector({
 // Listen for messages
 server.post('/api/messages', connector.listen());
 
+//Get user name
+slack.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, () +> {
+let username = slack.dataStore.getUserById(slack.activeUserId);
+         )};
+
 //Setup Bot
 var bot = new builder.UniversalBot(connector, [
         //Default Dialog
                 function(session){
-                     session.endDialog("Hello," + session.userData.name + ". Sakana is a bot that can help with a mulitude of tasks. Currently in Development.");
+                     session.endDialog("Hello," + username + ". Sakana is a bot that can help with a mulitude of tasks. Currently in Development.");
                       builder.Prompts.choice(session, "Here are some functions being worked on:", "Salesforce|Hubspot|Analytics", builder.ListStyle.button);
 
                 }
